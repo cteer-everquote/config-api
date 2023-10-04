@@ -1,19 +1,45 @@
-export * as PolicyUpdated from "./todo";
+export * as Policy from "./policyUpdated";
 import { event } from './event';
 import { z } from 'zod';
 import crypto from 'crypto';
 
 export const Events = {
-  Created: event("todo.created", {
+  PolicyUpdated: event("policy.updated", {
     id: z.string(),
+    firstName: z.string(),
+    lastName: z.string(),
+  }),
+  LeadSold: event("lead.sold", {
+    id: z.string(),
+    date: z.string(),
+    price: z.number()
   }),
 };
 
-export async function create() {
-  const id = crypto.randomUUID();
-  // write to database
+const firstNames = ['John', 'Matthew', 'Mark', 'Luke']
+const lastNames = ['Paladin', 'Sheeran', 'Dunford', 'Bay']
 
-  const x = await Events.Created.publish({
+export async function updatePolicy() {
+  const id = crypto.randomUUID();
+  const firstName = firstNames[Math.floor(Math.random()*firstNames.length)];
+  const lastName = lastNames[Math.floor(Math.random()*lastNames.length)];
+  const event = {
     id,
-  });
+    firstName,
+    lastName,
+  }
+  const x = await Events.PolicyUpdated.publish(event);
+  return event
+}
+
+export async function sellLead() {
+  const id = crypto.randomUUID();
+  const timestamp = Date()
+  const event = {
+    id,
+    date: timestamp.toLocaleUpperCase(),
+    price: 30,
+  }
+  const x = await Events.LeadSold.publish(event);
+  return event
 }

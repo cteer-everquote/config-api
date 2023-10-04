@@ -17,11 +17,20 @@ export function API({ stack }: StackContext) {
       "GET /": "packages/functions/src/lambda.handler",
       "GET /todo": "packages/functions/src/todo.list",
       "POST /todo": "packages/functions/src/todo.create",
+      "GET /policy": "packages/functions/src/policy.create",
     },
   });
 
   bus.subscribe("todo.created", {
     handler: "packages/functions/src/events/todo-created.handler",
+  });
+
+  bus.subscribe("policy.updated", {
+    handler: "packages/functions/src/handlers/policyUpdated.handler",
+  });
+
+  bus.subscribe("lead.sold", {
+    handler: "packages/functions/src/handlers/leadSold.handler",
   });
 
   stack.addOutputs({
