@@ -1,0 +1,17 @@
+{
+  "name": "@config-api-inno/core",
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "test": "sst bind vitest",
+    "typecheck": "tsc -noEmit"
+  },
+  "devDependencies": {
+    "vitest": "^0.34.6",
+    "@types/node": "^20.7.1",
+    "sst": "^2.26.8"
+  },
+  "dependencies": {
+    "zod": "^3.22.2"
+  }
+}
