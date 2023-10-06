@@ -11,5 +11,10 @@
     "@types/aws-lambda": "^8.10.122",
     "vitest": "^0.34.6",
     "sst": "^2.26.8"
+  },
+  "dependencies": {
+    "@aws-sdk/client-dynamodb": "^3.425.0",
+    "@aws-sdk/lib-dynamodb": "^3.425.0",
+    "dynamodb-toolbox": "^0.8.5"
   }
 }

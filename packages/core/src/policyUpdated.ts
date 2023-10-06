@@ -8,6 +8,7 @@ export const Events = {
     id: z.string(),
     firstName: z.string(),
     lastName: z.string(),
+    day: z.string()
   }),
   LeadSold: event("lead.sold", {
     id: z.string(),
@@ -20,6 +21,7 @@ const firstNames = ['John', 'Matthew', 'Mark', 'Luke']
 const lastNames = ['Paladin', 'Sheeran', 'Dunford', 'Bay']
 
 export async function updatePolicy() {
+  const timestamp = new Date()
   const id = crypto.randomUUID();
   const firstName = firstNames[Math.floor(Math.random()*firstNames.length)];
   const lastName = lastNames[Math.floor(Math.random()*lastNames.length)];
@@ -27,6 +29,7 @@ export async function updatePolicy() {
     id,
     firstName,
     lastName,
+    day: String(timestamp.getUTCDay())
   }
   const x = await Events.PolicyUpdated.publish(event);
   return event
